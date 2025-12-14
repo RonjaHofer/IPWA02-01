@@ -1,0 +1,71 @@
+.logo {
+  width: 15%;
+  float: right;
+  margin-right: 30px;
+  margin-top: 5px;
+}
+
+.info-box {
+    border: 1px solid #ccc;      /* grauer Rahmen */
+    border-radius: 8px;          /* abgerundete Ecken */
+    padding: 12px;               /* Abstand innen */
+    max-width: 400px;            /* optional: maximale Breite */
+    background-color: #f9f9f9;   /* leicht grauer Hintergrund */
+}
+
+.info-box a {
+    display: block;              /* sorgt für Untereinander-Darstellung */
+    margin-bottom: 8px;          /* Abstand zwischen den Links */
+    color: #0066cc;              /* Linkfarbe */
+    text-decoration: none;       /* Unterstreichung entfernen */
+}
+
+.info-box a:hover {
+    text-decoration: underline;  /* Unterstreichung beim Hover */
+}
+
+#map{height: 600px;}
+
+/* Popup Inhalt */
+.popup-container {
+    font-family: Arial;
+    padding: 6px;
+    font-size: 14px;
+}
+
+.popup-container div {
+    margin-bottom: 10px;
+}
+
+/* Eingabefelder */
+.popup-input{
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    margin-top: 4px;
+}
+.popup-select {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+
+/* Button */
+.popup-button {
+    width: 100%;
+    padding: 8px;
+    background: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.popup-button:hover {
+    background: #1878d1 ;
+}
+

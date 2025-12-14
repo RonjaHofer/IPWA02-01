@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ghost Net Fishing</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
+    <link href="/logo.png" rel="icon" type="image/png">
+</head>
+
+<body>
+<header></header>
+
+<nav class="navbar navbar-expand navbar-light bg-light mb-4 ">
+    <div class="container-fluid">
+        <div class="navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="/">Startseite</a></li>
+                <li class="nav-item"><a class="nav-link" href="/netzmeldung">Netzmeldung</a></li>
+                <li class="nav-item"><a class="nav-link" href="/weltkarte">Weltkarte</a></li>
+                <li class="nav-item"><a class="nav-link" href="/datenbank">Datenbank</a></li>
+                <li class="nav-item"><a class="nav-link" href="/info">Info</a></li>
+            </ul>
+            
+            <ul class="navbar-nav ms-auto">
+                <!-- Login/Registrieren für nicht angemeldete Nutzer -->
+                <li class="nav-item" th:if="${not #authorization.expression('isAuthenticated()')}">
+                    <a class="btn btn-outline-primary me-2" href="/login">Login</a>
+                </li>
+                <li class="nav-item" th:if="${not #authorization.expression('isAuthenticated()')}">
+                    <a class="btn btn-primary me-2" href="/registrieren">Registrieren</a>
+                </li>
+
+                <!-- Logout für angemeldete Nutzer -->
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <form class="d-inline" method="post" th:action="@{/logout}">
+                        <button class="btn btn-outline-danger" type="submit">Logout</button>
+                    </form>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<section class="m-4">
+    <h1>Liste aller Geisternetze</h1>
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="table-light">
+        <tr>
+            <th>Breitengrad</th>
+            <th>Längengrad</th>
+            <th>Größe</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <form method="get" th:action="@{/datenbank}">
+                <td><input class="form-control" name="breitengrad" placeholder="Breitengrad" type="text"></td>
+                <td><input class="form-control" name="laengengrad" placeholder="Längengrad" type="text"></td>
+                <td><input class="form-control" name="groesse" placeholder="Größe" type="text"></td>
+                <td><input class="form-control" name="status" placeholder="Status" type="text"></td>
+                <!-- unsichtbarer Button für Screenreader -->
+                <button class="visually-hidden" type="submit">Suchen</button>
+            </form>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="netz : ${geisternetze}">
+            <td th:text="${netz?.breitengrad != null ? #numbers.formatDecimal(netz.breitengrad, 0, 6) : '—'}"></td>
+            <td th:text="${netz?.laengengrad != null ? #numbers.formatDecimal(netz.laengengrad, 0, 6) : '—'}"></td>
+            <td th:text="${netz?.geschaetzteGroesse}"></td>
+            <td>
+                <form method="post" th:action="@{/datenbank/{id}/status(id=${netz.id})}">
+                    <select class="form-select" name="status" onchange="this.form.submit()">
+                        <option th:each="s : ${T(de.iu.ghostNetFishing.model.enums.Netzstatus).values()}"
+                                th:selected="${s == netz.status}"
+                                th:text="${s}"
+                                th:value="${s.name()}">
+                        </option>
+                    </select>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<footer>
+    <p class="text-center text-muted">© Shea Sepherd</p>
+</footer>
+</body>
+</html>

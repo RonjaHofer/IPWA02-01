@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Ghost Net Fishing</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
+    <link href="/logo.png" rel="icon" type="image/png">
+</head>
+<body>
+<header>
+
+</header>
+<nav class="navbar navbar-expand navbar-light bg-light mb-4 ">
+    <div class="container-fluid">
+        <div class="navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Startseite</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/netzmeldung">Netzmeldung</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/weltkarte">Weltkarte</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/datenbank">Datenbank</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/info">Info</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto">
+                <!-- Login/Registrieren für nicht angemeldete Nutzer -->
+                <li class="nav-item" th:if="${not #authorization.expression('isAuthenticated()')}">
+                    <a class="btn btn-outline-primary me-2" href="/login">Login</a>
+                </li>
+                <li class="nav-item" th:if="${not #authorization.expression('isAuthenticated()')}">
+                    <a class="btn btn-primary me-2" href="/registrieren">Registrieren</a>
+                </li>
+
+                <!-- Logout für angemeldete Nutzer -->
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <form class="d-inline" method="post" th:action="@{/logout}">
+                        <button class="btn btn-outline-danger" type="submit">Logout</button>
+                    </form>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<section class="m-4">
+    <h1>Ghost Net Fishing </h1>
+    <img alt="Logo image" class="logo" src="/logo.png">
+    <p>
+        Ghost Nets - auch Geisternetze genannt - sind verlorene oder absichtlich weggeworfene Fischernetze,
+        die unkontrolliert in den Ozeanen treiben. Sie stellen eine große Gefahr für
+        die Meereswelt dar: Fische, Meeressäuger, Schildkröten und Seevögel verfangen sich darin
+        und verenden. Da die Netze aus robustem Kunststoff bestehen, zerfallen sie erst nach Jahrzehnten
+        und tragen zusätzlich zur Mikroplastikbelastung bei. Neben der Bedrohung für Tiere zerstören Ghost Nets
+        empfindliche Lebensräume wie Korallenriffe und Seegraswiesen. Auch die Fischerei und Küstengemeinden leiden
+        unter den ökologischen und wirtschaftlichen Folgen.
+    </p>
+    <p>
+        Um das Problem einzudämmen, sind verschiedene Maßnahmen notwendig: bessere Rückverfolgbarkeit und Entsorgung
+        von Netzen, Bergungsaktionen, Recyclingprogramme sowie internationale Zusammenarbeit. Jede*r kann beitragen -
+        durch bewusste Konsum, Unterstützung von Projekten und die Meldung von treibenden Netzen oder verletzten Tieren.
+    </p>
+    <p>
+        Wir verfolgen Geisternetze und unterstützen die Bergung durch Freiwillige.
+        Sei dabei, die Meere von herrenlos treibenden Netzen zu befreien!
+    </p>
+    <p>
+        Über die Navigationsleiste gelangt du zu den verschiedenen Funktionen:
+        Unter <strong>Netzmeldung</strong> kannst du ein neu gesichtetes Geisternetz eintragen.
+        Hast du vor Ort festgestellt, dass ein Netz nicht mehr vorhanden ist, meldet es als <strong>verschollen</strong>.
+        Planst du eine Bergung, tragt sie unter <strong>Bergung</strong> ein, damit die Einsätze koordiniert werden
+        können.
+        Nach erfolgreicher Bergung kann das Netz dort ebenfalls als erledigt gemeldet werden, sodass es aus dem System
+        entfernt wird.
+    </p>
+
+    <div class="text-center my-3">
+        <a class="d-block mb-2"
+           href="https://www.wwf.de/themen-projekte/plastik/geisternetze" target="_blank">Weitere Informationen zu
+            Geisternetze (WWF)</a>
+        <a class="d-block"
+           href="https://www.nabu.de/natur-und-landschaft/meere/lebensraum-meer/gefahren/24489.html" target="_blank">
+            Weitere Informationen zu Geisternetze (NABU)</a>
+    </div>
+
+</section>
+<footer>
+    <p class="text-center text-muted">© Shea Sepherd</p>
+</footer>
+</body>
+</html>
